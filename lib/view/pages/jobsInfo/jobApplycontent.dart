@@ -83,7 +83,7 @@ class Biodata extends StatelessWidget {
         Row(
           children: [
             Text(
-              'Email',
+              'No.Handphone',
               style: TextStyle(
                   fontSize: 11.sp,
                   fontWeight: FontWeight.bold,
@@ -321,7 +321,7 @@ class UploadPortofolio extends StatelessWidget {
             strokeWidth: 1.5,
             color: Color(0xFF3366FF),
             child: Container(
-              height: 30.h,
+              height: 27.h,
               width: double.infinity,
               color: Color(0xFFECF2FF),
               child: Column(

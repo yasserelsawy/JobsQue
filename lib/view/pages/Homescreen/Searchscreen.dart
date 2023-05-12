@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:sizer/sizer.dart';
 
 import 'Searchfilter.dart';
 import 'extras.dart';
 
-class SearchScreen extends StatelessWidget {
-  // const SearchScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,5 +202,6 @@ class SearchScreen extends StatelessWidget {
         ),
       ),
     );
+    ;
   }
 }

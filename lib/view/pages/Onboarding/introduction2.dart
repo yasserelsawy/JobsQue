@@ -68,7 +68,7 @@ class Secondpage extends StatelessWidget {
               width: 327,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Thirdpage()));
                   },
                   style: ElevatedButton.styleFrom(

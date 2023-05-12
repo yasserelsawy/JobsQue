@@ -18,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late Api api;
+  Api? api = Api();
   bool ischecked = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -250,7 +250,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 85.w,
                 child: ElevatedButton(
                     onPressed: () {
-                      Login(emailController.text, passwordController.text,
+                      api!.Login(emailController.text, passwordController.text,
                           context);
                     },
                     style: ElevatedButton.styleFrom(

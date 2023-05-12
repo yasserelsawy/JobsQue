@@ -11,4 +11,18 @@ class NewsNtmNavState extends MycubitState {}
 
 class GetJobsSuccessState extends MycubitState {}
 
-class gettingname extends MycubitState {}
+class savejobstate extends MycubitState {}
+
+class removejobstate extends MycubitState {}
+
+class searchstate extends MycubitState {}
+
+class gettingnamestate extends MycubitState {}
+
+class togglesavestate extends MycubitState {}
+
+class emptysavedjobs extends MycubitState {}
+
+class changestepstate extends MycubitState {}
+
+class changeindexstate extends MycubitState {}

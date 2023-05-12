@@ -62,36 +62,6 @@ class _Emptysave2State extends State<Emptysave2> {
           ),
         ],
       )),
-      bottomNavigationBar: BottomNavigationBar(
-          showUnselectedLabels: true,
-          selectedItemColor: const Color(0xFF3366FF),
-          unselectedItemColor: const Color(0xFF9CA3AF),
-          currentIndex: selectedindex,
-          onTap: (index) {
-            setState(() {
-              selectedindex = index;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-                label: 'home',
-                icon: Image.asset('assets/images/home.png'),
-                activeIcon: Image.asset('assets/images/home2.png')),
-            BottomNavigationBarItem(
-                label: 'messages',
-                icon: Image.asset('assets/images/message.png'),
-                activeIcon: Image.asset('assets/images/message2.png')),
-            BottomNavigationBarItem(
-                label: 'Applied',
-                icon: Image.asset('assets/images/briefcase2.png'),
-                activeIcon: Image.asset('assets/images/briefcase.png')),
-            BottomNavigationBarItem(
-                label: 'Saved',
-                icon: Image.asset('assets/images/archive.png'),
-                activeIcon: Image.asset('assets/images/archive2.png')),
-            const BottomNavigationBarItem(
-                label: 'Profile', icon: Icon(Icons.person))
-          ]),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,12 +38,59 @@ class MycubitCubit extends Cubit<MycubitState> {
   //   final name = prefs.getString('name') ?? '';
   //   emit(name as MycubitState);
   // }
+  List<JobsModel> cubitsave = [];
 
-  Future getName(String newname) async {
-    var name;
+  void savejob(
+    JobsModel job,
+    List<JobsModel> savedjobscubit,
+  ) {
+    if (savedjobscubit.contains(job)) {
+      savedjobscubit.remove(job);
+      emit(removejobstate());
+    } else {
+      savedjobscubit.add(job);
+
+      emit(savejobstate());
+    }
+    for (JobsModel i in savedjobscubit) {
+      if (!cubitsave.contains(i)) {
+        cubitsave.add(i);
+        emit(savejobstate());
+      } else {
+        cubitsave.remove(i);
+        emit(removejobstate());
+      }
+    }
+
+    print(cubitsave.length);
+  }
+
+  void filterjobs(String query, List jobslist, List searchlist) async {
+    searchlist = jobslist
+        .where((job) => job.name!.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    emit(searchstate());
+  }
+
+  void toggle(bool favorite) {
+    favorite = !favorite;
+  }
+
+  Future<String> getName() async {
     final prefs = await SharedPreferences.getInstance();
-    name = prefs.getString('name');
-    newname = name;
-    emit(gettingname as MycubitState);
+    final name = prefs.getString('name') ?? '';
+    return name;
+  }
+
+  int currentstep = 0;
+  void changestep() {
+    currentstep++;
+    emit(changestepstate());
+  }
+
+  void changeindex(int index) {
+    currentstep = index;
+    emit(changeindexstate());
   }
 }

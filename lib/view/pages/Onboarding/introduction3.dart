@@ -19,7 +19,7 @@ class Thirdpage extends StatelessWidget {
                 Spacer(),
                 TextButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const RegisterScreen()));
@@ -70,7 +70,7 @@ class Thirdpage extends StatelessWidget {
               width: 327,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Forthpage()));
                   },
                   style: ElevatedButton.styleFrom(

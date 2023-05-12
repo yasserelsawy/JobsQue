@@ -53,7 +53,7 @@ List<OldNotification> oldnotificationList = [
       title: 'Email setup successful',
       subtitle:
           'Your email setup was successful with the following details: Your new email is rafifdianganz@gmail.com.',
-      icon: 'assets/images/email2.png',
+      icon: 'assets/images/Email2.png',
       time: '10.00AM'),
   OldNotification(
       title: 'Welcome to Jobsque',

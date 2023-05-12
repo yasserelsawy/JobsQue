@@ -1,13 +1,10 @@
 import 'dart:convert';
 
-import 'package:graduation_project/view/pages/Profile/Personaldetails.dart';
 import 'package:graduation_project/view/pages/Setting_profile/profile.dart';
 import 'package:graduation_project/view/pages/loginandregister/Loginscreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../view/pages/Profile/Education.dart';
 
 Future<void> Register(
     String name, String email, var password, BuildContext context) async {
@@ -20,38 +17,38 @@ Future<void> Register(
   );
 
   if (response.statusCode == 200) {
-    Navigator.push(
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => LoginScreen()));
   } else {
     error = 'oops error';
   }
 }
 
-Future<void> Login(String email, var password, BuildContext context) async {
-  final response = await http.post(
-    Uri.parse('http://164.92.246.77/api/auth/login'),
-    body: {
-      'email': email,
-      'password': password,
-    },
-  );
+// Future<void> Login(String email, var password, BuildContext context) async {
+//   final response = await http.post(
+//     Uri.parse('http://164.92.246.77/api/auth/login'),
+//     body: {
+//       'email': email,
+//       'password': password,
+//     },
+//   );
 
-  if (response.statusCode == 200) {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setInt('id', jsonDecode(response.body)['user']['id']);
-    prefs.setString('name', jsonDecode(response.body)['user']['name']);
-    prefs.setString('token', jsonDecode(response.body)['token']);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const Profile()));
-    print('successss');
-  } else if (response.statusCode == 401) {
-    // setState(() {
-    //   errorMessage = 'Wrong email or password';
-    // });
-  } else {
-    final error = json.decode(response.body)['error'];
-  }
-}
+//   if (response.statusCode == 200) {
+//     final prefs = await SharedPreferences.getInstance();
+//     prefs.setInt('id', jsonDecode(response.body)['user']['id']);
+//     prefs.setString('name', jsonDecode(response.body)['user']['name']);
+//     prefs.setString('token', jsonDecode(response.body)['token']);
+
+//     // ignore: use_build_context_synchronously
+//     Navigator.push(
+//         context, MaterialPageRoute(builder: (context) => const Profile()));
+//     print('successss');
+//   } else if (response.statusCode == 401) {
+//   } else {
+//     final error = json.decode(response.body)['error'];
+//   }
+// }
 
 Future updateProfile(
     String bio, String name, String adress, String phone) async {
@@ -115,6 +112,31 @@ class Api {
       return jsonDecode(response.body)['data'];
     } else {
       throw Exception('problem with status code ${response.statusCode}');
+    }
+  }
+
+  String? savename;
+  Future<void> Login(String email, var password, BuildContext context) async {
+    final response = await http.post(
+      Uri.parse('http://164.92.246.77/api/auth/login'),
+      body: {
+        'email': email,
+        'password': password,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setInt('id', jsonDecode(response.body)['user']['id']);
+      prefs.setString('name', jsonDecode(response.body)['user']['name']);
+      prefs.setString('token', jsonDecode(response.body)['token']);
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const Profile()));
+      print('successss');
+    } else if (response.statusCode == 401) {
+    } else {
+      final error = json.decode(response.body)['error'];
     }
   }
 }
