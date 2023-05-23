@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/controller/cubit/mycubit_cubit.dart';
 import 'package:graduation_project/view/pages/Profile/Experience.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-
+import 'package:http/http.dart' as http;
+import '../../../controller/database/remote.dart';
 import '../../Widgets/customtTextFormField.dart';
 
 class EducationPage extends StatefulWidget {
@@ -15,11 +20,15 @@ class EducationPage extends StatefulWidget {
 }
 
 class _EducationPageState extends State<EducationPage> {
-  TextEditingController _firstcontroller = TextEditingController();
-  TextEditingController _secondcontroller = TextEditingController();
+  TextEditingController universitycontroller = TextEditingController();
+  TextEditingController titlecontroller = TextEditingController();
+  TextEditingController startyearcontroller = TextEditingController();
+
+  TextEditingController endyearcontroller = TextEditingController();
 
   late DateTime _Startyear;
   late DateTime _Endyear;
+  Api api = Api();
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +83,7 @@ class _EducationPageState extends State<EducationPage> {
                       height: 7.h,
                       width: 80.w,
                       child: CustomTextFormFieldnoImage(
+                        controller: universitycontroller,
                         hintText: 'Please enter your University',
                       )),
                   SizedBox(
@@ -95,6 +105,7 @@ class _EducationPageState extends State<EducationPage> {
                       height: 7.h,
                       width: 80.w,
                       child: CustomTextFormFieldnoImage(
+                        controller: titlecontroller,
                         hintText: 'Please enter your Title',
                       )),
                   SizedBox(
@@ -116,7 +127,7 @@ class _EducationPageState extends State<EducationPage> {
                       height: 7.h,
                       width: 80.w,
                       child: CustomTextFormFieldnoImage(
-                        controller: _firstcontroller,
+                        controller: startyearcontroller,
                         hintText: 'Please enter your Start Year',
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -126,7 +137,7 @@ class _EducationPageState extends State<EducationPage> {
                                 onConfirm: (date) {
                                   setState(() {
                                     _Startyear = date;
-                                    _firstcontroller.text =
+                                    startyearcontroller.text =
                                         _Startyear.toString();
                                   });
                                 },
@@ -157,7 +168,7 @@ class _EducationPageState extends State<EducationPage> {
                       height: 7.h,
                       width: 80.w,
                       child: CustomTextFormFieldnoImage(
-                        controller: _secondcontroller,
+                        controller: endyearcontroller,
                         suffixIcon: IconButton(
                             onPressed: () {
                               DatePicker.showDatePicker(
@@ -166,7 +177,7 @@ class _EducationPageState extends State<EducationPage> {
                                 onConfirm: (date) {
                                   setState(() {
                                     _Endyear = date;
-                                    _secondcontroller.text =
+                                    endyearcontroller.text =
                                         _Endyear.toString();
                                   });
                                 },
@@ -184,10 +195,16 @@ class _EducationPageState extends State<EducationPage> {
                     width: 327,
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Experiencepage()));
+                          api.postEducation(
+                              universitycontroller.text,
+                              titlecontroller.text,
+                              startyearcontroller.text,
+                              endyearcontroller.text,
+                              context);
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => Experiencepage()));
                         },
                         style: ElevatedButton.styleFrom(
                             primary: Color(0xFF3366FF),

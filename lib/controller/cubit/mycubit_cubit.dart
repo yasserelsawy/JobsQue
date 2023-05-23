@@ -1,43 +1,59 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:graduation_project/view/pages/loginandregister/Loginscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../model/JobsModel.dart';
 import '../database/remote.dart';
-
+import 'package:http/http.dart' as http;
 part 'mycubit_state.dart';
 
 class MycubitCubit extends Cubit<MycubitState> {
   static MycubitCubit get(context) => BlocProvider.of(context);
 
   MycubitCubit() : super(MycubitInitial());
-
+  Api api = Api();
+  // bool isregistered = false;
+  bool isOnboardingCompleted = false;
   List<JobsModel> jobsList = [];
+
   Future<List> getAllJobs() async {
     List<dynamic> data = await Api().get(url: 'http://164.92.246.77/api/jobs');
 
     List<JobsModel> jobs = data.map((job) => JobsModel.fromJson(job)).toList();
 
     jobsList = jobs;
+
     emit(GetJobsSuccessState());
     print(jobsList[1].name);
-    // List<JobsModel> jobs = [];
-    // for(int i=0;i<data.length;i++){
-    // jobs.add(JobsModel.fromJson(data[i]));
-    // }
 
-    // for (JobsModel job in jobs) {
-    // print('${job.name}');
-    // }
-    // //print(jobs[data[1].]);
     return data;
   }
 
-  // Future<void> loadName() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final name = prefs.getString('name') ?? '';
-  //   emit(name as MycubitState);
-  // }
+  Future<void> register(
+      String name, String email, String password, BuildContext context) async {
+    try {
+      await api.Register(name, email, password);
+      emit(registerSucsseed());
+      // final prefs = await SharedPreferences.getInstance();
+      // prefs.setBool('isregistered', true);
+    } catch (e) {
+      emit(registerFailure(error: e.toString()));
+    }
+  }
+
+  Future<void> Login(String email, String password) async {
+    try {
+      emit(LoginLoadingstate());
+      await api.Login(email, password);
+      emit(LoginSucsseed());
+    } catch (e) {
+      emit(LoginFailure(error: e.toString()));
+    }
+  }
+
+  // Future<void> Login() async {}
+
   List<JobsModel> cubitsave = [];
 
   void savejob(
@@ -73,10 +89,6 @@ class MycubitCubit extends Cubit<MycubitState> {
     emit(searchstate());
   }
 
-  void toggle(bool favorite) {
-    favorite = !favorite;
-  }
-
   Future<String> getName() async {
     final prefs = await SharedPreferences.getInstance();
     final name = prefs.getString('name') ?? '';
@@ -93,4 +105,15 @@ class MycubitCubit extends Cubit<MycubitState> {
     currentstep = index;
     emit(changeindexstate());
   }
+
+  List<JobsModel> AppliedJobs = [];
+  void addjobtoapplied(JobsModel Job) {
+    AppliedJobs.add(Job);
+    emit(AddJobState());
+  }
 }
+
+// class Togglecubit extends Cubit<bool> {
+//   Togglecubit() : super(false);
+//   void toggle() => emit(!state);
+// }

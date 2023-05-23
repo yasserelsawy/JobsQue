@@ -21,7 +21,7 @@ class Language extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => Profile(),

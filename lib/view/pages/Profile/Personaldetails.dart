@@ -20,7 +20,7 @@ class PersonalDetails extends StatefulWidget {
 }
 
 class _PersonalDetailsState extends State<PersonalDetails> {
-  late Api api;
+  Api api = Api();
   TextEditingController namecontroller = TextEditingController();
   TextEditingController biocontroller = TextEditingController();
   TextEditingController adresscontroller = TextEditingController();
@@ -210,8 +210,11 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                   width: 327,
                   child: ElevatedButton(
                       onPressed: () {
-                        updateProfile(biocontroller.text, namecontroller.text,
-                            adresscontroller.text, phonecontroller.text);
+                        api.updateProfile(
+                            biocontroller.text,
+                            namecontroller.text,
+                            adresscontroller.text,
+                            phonecontroller.text);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

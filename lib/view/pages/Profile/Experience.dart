@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/view/pages/Setting_profile/profile.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../controller/database/remote.dart';
 import '../../Widgets/customtTextFormField.dart';
 
 class Experiencepage extends StatefulWidget {
@@ -13,9 +14,14 @@ class Experiencepage extends StatefulWidget {
 
 class _ExperiencepageState extends State<Experiencepage> {
   final List<String> _items = ['Full time', 'Part time', 'Freelance'];
-  late var _selectedItem;
+  late var selectedItem;
   bool ischecked = false;
+  TextEditingController positioncontroller = TextEditingController();
+  TextEditingController Locationcontroller = TextEditingController();
+  TextEditingController companynamecontroller = TextEditingController();
 
+  TextEditingController startyearcontroller = TextEditingController();
+  Api api = Api();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +79,7 @@ class _ExperiencepageState extends State<Experiencepage> {
                     height: 7.h,
                     width: 80.w,
                     child: CustomTextFormFieldnoImage(
+                      controller: positioncontroller,
                       hintText: 'Please enter your Position ',
                     )),
                 SizedBox(
@@ -104,7 +111,7 @@ class _ExperiencepageState extends State<Experiencepage> {
                       }).toList(),
                       onChanged: (value) {
                         setState(() {
-                          _selectedItem = value;
+                          selectedItem = value;
                         });
                       }),
                 ),
@@ -127,6 +134,7 @@ class _ExperiencepageState extends State<Experiencepage> {
                     height: 7.h,
                     width: 80.w,
                     child: CustomTextFormFieldnoImage(
+                      controller: companynamecontroller,
                       hintText: 'Please enter your Company name',
                     )),
                 SizedBox(
@@ -148,6 +156,7 @@ class _ExperiencepageState extends State<Experiencepage> {
                     height: 7.h,
                     width: 80.w,
                     child: CustomTextFormField(
+                        controller: Locationcontroller,
                         image: 'assets/images/location.png',
                         hintText: 'Please enter your Location')),
                 SizedBox(
@@ -169,6 +178,7 @@ class _ExperiencepageState extends State<Experiencepage> {
                     height: 7.h,
                     width: 80.w,
                     child: CustomTextFormFieldnoImage(
+                      controller: startyearcontroller,
                       hintText: 'Please enter your Starting Year ',
                     )),
                 Row(
@@ -198,8 +208,15 @@ class _ExperiencepageState extends State<Experiencepage> {
                   width: 327,
                   child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Profile()));
+                        api.PostExperience(
+                            positioncontroller.text,
+                            selectedItem,
+                            companynamecontroller.text,
+                            Locationcontroller.text,
+                            startyearcontroller.text,
+                            context);
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) => Profile()));
                       },
                       style: ElevatedButton.styleFrom(
                           primary: Color(0xFF3366FF),

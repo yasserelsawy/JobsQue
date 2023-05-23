@@ -216,6 +216,7 @@ class JobDetail extends StatelessWidget {
                 child: mainbuttom(
                     text: 'Apply Now',
                     onTap: () {
+                      cubit.addjobtoapplied(list[jobsindex]);
                       navigateTo(context, JobApplication());
                     })),
             floatingActionButtonLocation:

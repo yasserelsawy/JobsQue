@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/controller/cubit/cubit/onboarding_cubit.dart';
 import 'package:graduation_project/controller/cubit/mycubit_cubit.dart';
 import 'package:graduation_project/controller/database/remote.dart';
 import 'package:graduation_project/view/pages/Homescreen/Homeview.dart';
@@ -32,17 +33,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => MycubitCubit()..getAllJobs(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => MycubitCubit()..getAllJobs(),
+        ),
+        BlocProvider(
+          create: (context) => OnboardingCubit()..onboarding(),
+        ),
+      ],
       child: Sizer(builder: (context, orientation, deviceType) {
         return MaterialApp(
-          // initialRoute: ,
-          // useInheritedMediaQuery: true,
-          // locale: DevicePreview.locale(context),
-          // builder: DevicePreview.appBuilder,
-          // theme: ThemeData().copyWith(),
           debugShowCheckedModeBanner: false,
-          home: Secondpage(),
+          home: BlocProvider.of<OnboardingCubit>(context).isOnboardingCompleted
+              ? LoginScreen()
+              : Secondpage(),
         );
       }),
     );

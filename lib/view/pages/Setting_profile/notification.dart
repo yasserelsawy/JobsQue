@@ -78,7 +78,7 @@ class Notifications1 extends StatelessWidget {
                       return InkWell(
                           onTap: () {
                             if (index == 0) {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const Editeprofile(),

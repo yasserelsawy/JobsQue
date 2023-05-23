@@ -9,6 +9,7 @@ import '../../../model/generalModel.dart';
 import '../../../model/othersModel.dart';
 import '../../widgets/assets.dart';
 import '../../widgets/shapegeneral.dart';
+import '../Applied_jobs/Saved-Rejected-Main-Screen.dart';
 import '../Homescreen/Homeview.dart';
 import '../Messages/contactspage.dart';
 import '../Profile/Personaldetails.dart';
@@ -33,8 +34,8 @@ class _ProfileState extends State<Profile> {
     Center(
       child: Contactspage(),
     ),
-    Center(
-      child: JobApplication(),
+    const Center(
+      child: SavedScreen(),
     ),
     Center(
       child: Savedjobs(),
@@ -209,7 +210,7 @@ class _ProfileState extends State<Profile> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(
+                                  Navigator.push(
                                       BuildContext as BuildContext,
                                       MaterialPageRoute(
                                         builder: (context) => Editeprofile(),
@@ -279,33 +280,33 @@ class _ProfileState extends State<Profile> {
                             return InkWell(
                                 onTap: () {
                                   if (index == 0) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               PersonalDetails(),
                                         ));
                                   } else if (index == 1) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => Protfolio(),
                                         ));
                                   } else if (index == 2) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => Language(),
                                         ));
                                   } else if (index == 3) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               Notifications1(),
                                         ));
                                   } else if (index == 4) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
@@ -354,32 +355,32 @@ class _ProfileState extends State<Profile> {
                             return InkWell(
                                 onTap: () {
                                   if (index == 0) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               const Editeprofile(),
                                         ));
                                   } else if (index == 1) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => LoginScreen(),
                                         ));
                                   } else if (index == 2) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => LoginScreen(),
                                         ));
                                   } else if (index == 3) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => LoginScreen(),
                                         ));
                                   } else if (index == 4) {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => LoginScreen(),

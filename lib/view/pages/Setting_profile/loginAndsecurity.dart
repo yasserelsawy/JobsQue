@@ -27,7 +27,7 @@ class LoginAndSecurity extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => Profile(),
@@ -78,32 +78,32 @@ class LoginAndSecurity extends StatelessWidget {
                         return InkWell(
                             onTap: () {
                               if (index == 0) {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           const Editeprofile(),
                                     ));
                               } else if (index == 1) {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => Protfolio(),
                                     ));
                               } else if (index == 2) {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => Language(),
                                     ));
                               } else if (index == 3) {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => Notifications1(),
                                     ));
                               } else if (index == 4) {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => LoginScreen(),

@@ -1,6 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'mycubit_cubit.dart';
 
-@immutable
 abstract class MycubitState {}
 
 class MycubitInitial extends MycubitState {}
@@ -26,3 +26,26 @@ class emptysavedjobs extends MycubitState {}
 class changestepstate extends MycubitState {}
 
 class changeindexstate extends MycubitState {}
+
+class registerLoadingstate extends MycubitState {}
+
+class registerSucsseed extends MycubitState {}
+
+class registerFailure extends MycubitState {
+  String error;
+  registerFailure({
+    required this.error,
+  });
+}
+
+class LoginLoadingstate extends MycubitState {}
+
+class LoginSucsseed extends MycubitState {}
+
+class AddJobState extends MycubitState {}
+
+class LoginFailure extends MycubitState {
+  String error;
+
+  LoginFailure({required this.error});
+}

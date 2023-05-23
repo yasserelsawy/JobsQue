@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/view/pages/loginandregister/Registerscreen.dart';
 import 'package:graduation_project/view/pages/Onboarding/introduction3.dart';
 import 'package:graduation_project/view/pages/Onboarding/introduction4.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Forthpage extends StatelessWidget {
   const Forthpage({super.key});
@@ -69,11 +70,14 @@ class Forthpage extends StatelessWidget {
               height: 48,
               width: 327,
               child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    await prefs.setBool('isOnboardingCompleted', true);
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RegisterScreen()));
+                            builder: (context) => const RegisterScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                       primary: const Color(0xFF3366FF),
