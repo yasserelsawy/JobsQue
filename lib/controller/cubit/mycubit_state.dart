@@ -44,6 +44,13 @@ class LoginSucsseed extends MycubitState {}
 
 class AddJobState extends MycubitState {}
 
+class favoritestate extends MycubitState {}
+
+class failedapply extends MycubitState {
+  String error;
+  failedapply({required this.error});
+}
+
 class LoginFailure extends MycubitState {
   String error;
 

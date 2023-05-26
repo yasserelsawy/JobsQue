@@ -59,7 +59,7 @@ class HomeView extends StatelessWidget {
                                           ),
                                           textAlign: TextAlign.start,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 8,
                                         ),
                                         Text(
@@ -68,7 +68,7 @@ class HomeView extends StatelessWidget {
                                               fontSize: 11.sp,
                                               color: Colors.grey),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 30,
                                         ),
                                       ],
@@ -90,7 +90,7 @@ class HomeView extends StatelessWidget {
                                       onPressed: () {
                                         navigateTo(context, NotificationPage());
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                           Icons.notifications_none_outlined)),
                                 ),
                                 //image: AssetImage('assets/images/ring.png')
@@ -104,7 +104,8 @@ class HomeView extends StatelessWidget {
                               },
                               child: Container(
                                 // margin:  EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                padding: EdgeInsets.fromLTRB(12, 14, 26, 10),
+                                padding:
+                                    const EdgeInsets.fromLTRB(12, 14, 26, 10),
                                 width: double.infinity,
                                 height: 52,
                                 decoration: BoxDecoration(
@@ -164,7 +165,7 @@ class HomeView extends StatelessWidget {
                                   builder: (context) => ListView.separated(
                                       scrollDirection: Axis.horizontal,
                                       // padding: EdgeInsets.only(left: 16,right: 6),
-                                      physics: BouncingScrollPhysics(),
+                                      physics: const BouncingScrollPhysics(),
                                       separatorBuilder: (context, index) =>
                                           const SizedBox(
                                             width: 16,
@@ -185,7 +186,7 @@ class HomeView extends StatelessWidget {
                                       child: CircularProgressIndicator())),
                             ),
 
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
 
@@ -210,7 +211,7 @@ class HomeView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
 
@@ -312,7 +313,7 @@ Widget customSuggestedJobsList(list, BuildContext context) {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 6.5,
                   ),
                   Container(
@@ -334,7 +335,7 @@ Widget customSuggestedJobsList(list, BuildContext context) {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 6.5,
                   ),
                   Container(
@@ -362,44 +363,41 @@ Widget customSuggestedJobsList(list, BuildContext context) {
         ),
         Flexible(
           flex: 1,
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                children: [
-                  Text(
-                    '\$${list.salary}/Month',
-                    style: TextStyle(fontSize: 14.sp, color: Colors.white),
-                    textAlign: TextAlign.start,
-                  ),
-                  Spacer(),
-                  // apply job
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      width: 96,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0xFF3366FF),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              children: [
+                Text(
+                  '\$${list.salary}/Month',
+                  style: TextStyle(fontSize: 14.sp, color: Colors.white),
+                  textAlign: TextAlign.start,
+                ),
+                const Spacer(),
+                // apply job
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 96,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey,
                       ),
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            'Apply now',
-                            style:
-                                TextStyle(fontSize: 9.sp, color: Colors.white),
-                          ),
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xFF3366FF),
+                    ),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          'Apply now',
+                          style: TextStyle(fontSize: 9.sp, color: Colors.white),
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -408,7 +406,7 @@ Widget customSuggestedJobsList(list, BuildContext context) {
   );
 }
 
-Widget customJobsList(list, BuildContext context) {
+Widget customJobsList(JobsModel list, BuildContext context) {
   var cubit = MycubitCubit.get(context);
   List<JobsModel> save = [];
 
@@ -440,14 +438,17 @@ Widget customJobsList(list, BuildContext context) {
                       list,
                       save,
                     );
+                    cubit.favoritejob(list);
                   },
-                  icon: Image.asset('assets/images/archive2.png'))
+                  icon: list.isfavorite
+                      ? Image.asset('assets/images/archive2.png')
+                      : Image.asset('assets/images/archive.png'))
 
               //const Image(
               //   image: AssetImage('assets/images/save3.png'),
               // ),
               ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Row(

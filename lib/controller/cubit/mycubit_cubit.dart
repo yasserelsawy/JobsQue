@@ -18,7 +18,7 @@ class MycubitCubit extends Cubit<MycubitState> {
   List<JobsModel> jobsList = [];
 
   Future<List> getAllJobs() async {
-    List<dynamic> data = await Api().get(url: 'http://164.92.246.77/api/jobs');
+    List<dynamic> data = await Api().get(url: 'http://167.71.79.133/api/jobs');
 
     List<JobsModel> jobs = data.map((job) => JobsModel.fromJson(job)).toList();
 
@@ -108,8 +108,23 @@ class MycubitCubit extends Cubit<MycubitState> {
 
   List<JobsModel> AppliedJobs = [];
   void addjobtoapplied(JobsModel Job) {
-    AppliedJobs.add(Job);
-    emit(AddJobState());
+    if (!AppliedJobs.contains(Job)) {
+      AppliedJobs.add(Job);
+      emit(AddJobState());
+    }
+  }
+
+  void favoritejob(JobsModel model) {
+    model.isfavorite = !model.isfavorite;
+    emit(favoritestate());
+  }
+
+  Future postApply(String name, email, int number, jobid) async {
+    try {
+      api.postApply(name, email, number, jobid);
+    } catch (e) {
+      emit(failedapply(error: e.toString()));
+    }
   }
 }
 

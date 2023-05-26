@@ -179,7 +179,7 @@ class ActiveItemList extends StatelessWidget {
                         height: 1.h,
                       ),
                       Text(
-                        '${jobsmodel.jobSkill}',
+                        '${jobsmodel.jobTimeType}',
                         style:
                             TextStyle(color: Color(0xff374151), fontSize: 9.sp),
                       )
@@ -187,14 +187,22 @@ class ActiveItemList extends StatelessWidget {
                   ),
                   Spacer(),
                   IconButton(
-                      onPressed: () {
-                        cubit.savejob(jobsmodel, savedjobscubit);
-                      },
-                      icon: Image.asset(
-                        'assets/images/archive-minus-white.png',
-                        height: 5.h,
-                        width: 10.w,
-                      ))
+                    onPressed: () {
+                      cubit.savejob(jobsmodel, savedjobscubit);
+                      cubit.favoritejob(jobsmodel);
+                    },
+                    icon: jobsmodel.isfavorite
+                        ? Image.asset(
+                            'assets/images/archive-minus.png',
+                            height: 5.h,
+                            width: 10.w,
+                          )
+                        : Image.asset(
+                            'assets/images/archive-minus-white.png',
+                            height: 5.h,
+                            width: 10.w,
+                          ),
+                  )
                 ],
               ),
               SizedBox(

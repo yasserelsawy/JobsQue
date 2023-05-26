@@ -20,26 +20,29 @@ class JobsModel {
   int? expired;
   String? createdAt;
   String? updatedAt;
+  bool isfavorite = false;
 
-  JobsModel(
-      {required this.id,
-      required this.name,
-      required this.image,
-      this.jobTimeType,
-      this.jobType,
-      this.jobLevel,
-      this.jobDescription,
-      this.jobSkill,
-      this.compName,
-      this.compEmail,
-      this.compWebsite,
-      this.aboutComp,
-      this.location,
-      this.salary,
-      this.favorites,
-      this.expired,
-      this.createdAt,
-      this.updatedAt});
+  JobsModel({
+    required this.id,
+    required this.name,
+    required this.image,
+    this.isfavorite = false,
+    this.jobTimeType,
+    this.jobType,
+    this.jobLevel,
+    this.jobDescription,
+    this.jobSkill,
+    this.compName,
+    this.compEmail,
+    this.compWebsite,
+    this.aboutComp,
+    this.location,
+    this.salary,
+    this.favorites,
+    this.expired,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   JobsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

@@ -73,7 +73,7 @@ class SavedScreen extends StatelessWidget {
                 height: 2.h,
               ),
               // el Tab Bar -----------------------------------------------------
-              Expanded(
+              const Expanded(
                   child: TabBarView(
                 children: [ActiveContent(), RejectedContent()],
               )),
