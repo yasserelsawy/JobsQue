@@ -168,7 +168,7 @@ class Api {
     String name,
     String email,
     int number,
-    jobid,
+    // jobid,
   ) async {
     final url = Uri.parse('http://167.71.79.133/api/apply');
     final headers = {'Authorization': 'Bearer $token'};
@@ -176,12 +176,10 @@ class Api {
       'name': name,
       'email': email,
       'mobile': number,
-      "jobs_id": jobid,
+      // "jobs_id": jobid,
       'user_id': id
     });
-    if (response.statusCode == 200) {
-      print('applied success');
-    } else if (response.statusCode != 200) {
+    if (response.statusCode != 200) {
       throw Exception('error applying');
     }
   }

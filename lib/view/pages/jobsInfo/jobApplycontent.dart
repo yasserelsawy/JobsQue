@@ -9,7 +9,11 @@ import '../../Widgets/customtTextFormField.dart';
 import '../../widgets/apply-job-container-widget.dart';
 
 class Biodata extends StatelessWidget {
-  const Biodata({Key? key}) : super(key: key);
+  Biodata(this.fullNamecontroller, this.emailcontroller, this.phonecontroller);
+  TextEditingController fullNamecontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
+
+  TextEditingController phonecontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +60,7 @@ class Biodata extends StatelessWidget {
         ),
         SizedBox(height: 2.h),
         CustomTextFormField(
+            controller: fullNamecontroller,
             image: "assets/images/profileTextFormField.png",
             hintText: "Full Name"),
         SizedBox(height: 2.h),
@@ -78,7 +83,10 @@ class Biodata extends StatelessWidget {
           ],
         ),
         SizedBox(height: 2.h),
-        CustomTextFormField(image: "assets/images/sms.png", hintText: "Email"),
+        CustomTextFormField(
+            controller: emailcontroller,
+            image: "assets/images/sms.png",
+            hintText: "Email"),
         SizedBox(height: 2.h),
         Row(
           children: [
@@ -102,6 +110,7 @@ class Biodata extends StatelessWidget {
           height: 2.h,
         ),
         IntlPhoneField(
+          controller: phonecontroller,
           invalidNumberMessage: 'Invalid Number',
           style: TextStyle(fontSize: 14.sp),
           decoration: InputDecoration(

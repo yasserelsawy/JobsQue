@@ -16,6 +16,10 @@ class JobApplication extends StatefulWidget {
 }
 
 class _JobApplicationState extends State<JobApplication> {
+  TextEditingController fullNamecontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
+
+  TextEditingController phonecontroller = TextEditingController();
   // int currentStep = 0;
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,8 @@ class _JobApplicationState extends State<JobApplication> {
                   CustomStepper(),
                   SizedBox(height: 2.h),
                   cubit.currentstep == 0
-                      ? Biodata()
+                      ? Biodata(
+                          fullNamecontroller, emailcontroller, phonecontroller)
                       : cubit.currentstep == 1
                           ? TypeOfWork()
                           : cubit.currentstep == 2
@@ -61,41 +66,45 @@ class _JobApplicationState extends State<JobApplication> {
           floatingActionButton: Container(
             color: Colors.transparent,
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  minimumSize: Size(80.w, 6.h),
-                  backgroundColor: const Color(0xFF3366FF)),
-              onPressed: () {
-                BlocProvider.of<MycubitCubit>(context).changestep();
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    minimumSize: Size(80.w, 6.h),
+                    backgroundColor: const Color(0xFF3366FF)),
+                onPressed: () {
+                  BlocProvider.of<MycubitCubit>(context).changestep();
 
-                if (cubit.currentstep > 2) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SuccessApply()));
-                  cubit.currentstep = 0;
-                }
-              },
-              child: cubit.currentstep == 0
-                  ? Text(
-                      'Next',
-                      style: TextStyle(fontSize: 10.sp),
-                    )
-                  : cubit.currentstep == 1
-                      ? Text(
-                          'Next',
-                          style: TextStyle(fontSize: 10.sp),
-                        )
-                      : cubit.currentstep == 2
-                          ? Text(
-                              'Submit',
-                              style: TextStyle(fontSize: 10.sp),
-                            )
-                          : Text(
-                              'Submit',
-                              style: TextStyle(fontSize: 10.sp),
-                            ),
-            ),
+                  if (cubit.currentstep > 2) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SuccessApply()));
+                    cubit.currentstep = 0;
+                  } else if (cubit.currentstep == 0) {
+                    cubit.postApply(
+                      fullNamecontroller.text,
+                      emailcontroller.text,
+                      phonecontroller.text,
+                    );
+                  }
+                },
+                child: cubit.currentstep == 0
+                    ? Text(
+                        'Next',
+                        style: TextStyle(fontSize: 10.sp),
+                      )
+                    : cubit.currentstep == 1
+                        ? Text(
+                            'Next',
+                            style: TextStyle(fontSize: 10.sp),
+                          )
+                        : cubit.currentstep == 2
+                            ? Text(
+                                'Submit',
+                                style: TextStyle(fontSize: 10.sp),
+                              )
+                            : null),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniCenterFloat,

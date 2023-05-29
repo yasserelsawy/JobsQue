@@ -81,13 +81,7 @@ class MycubitCubit extends Cubit<MycubitState> {
     print(cubitsave.length);
   }
 
-  void filterjobs(String query, List jobslist, List searchlist) async {
-    searchlist = jobslist
-        .where((job) => job.name!.toLowerCase().contains(query.toLowerCase()))
-        .toList();
 
-    emit(searchstate());
-  }
 
   Future<String> getName() async {
     final prefs = await SharedPreferences.getInstance();
@@ -119,9 +113,17 @@ class MycubitCubit extends Cubit<MycubitState> {
     emit(favoritestate());
   }
 
-  Future postApply(String name, email, int number, jobid) async {
+  Future postApply(
+    String name,
+    email,
+    number,
+  ) async {
     try {
-      api.postApply(name, email, number, jobid);
+      api.postApply(
+        name,
+        email,
+        number,
+      );
     } catch (e) {
       emit(failedapply(error: e.toString()));
     }

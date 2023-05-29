@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           home: BlocProvider.of<OnboardingCubit>(context).isOnboardingCompleted
               ? LoginScreen()
-              : Secondpage(),
+              : const Secondpage(),
         );
       }),
     );

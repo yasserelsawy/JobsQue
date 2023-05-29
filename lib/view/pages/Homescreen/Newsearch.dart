@@ -18,9 +18,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MycubitCubit, MycubitState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         final cubit = MycubitCubit.get(context);
         List<JobsModel> jobslist = cubit.jobsList;
@@ -41,7 +39,6 @@ class _SearchPageState extends State<SearchPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-
                     child: Row(
                       children: [
                         Expanded(
@@ -72,17 +69,19 @@ class _SearchPageState extends State<SearchPage> {
                             ),
                             child: Row(
                               children: [
-                                Image(
+                                const Image(
                                   image: AssetImage('assets/images/search.png'),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Expanded(
                                   child: TextField(
                                     controller: searchController,
-                                    onChanged: (query) => filterjobs(query),
-                                    decoration: InputDecoration.collapsed(
+                                    onChanged: (query) => filterjobs(
+                                      query,
+                                    ),
+                                    decoration: const InputDecoration.collapsed(
                                       hintText: 'Search....',
                                     ),
                                   ),
@@ -93,15 +92,6 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                       ],
                     ),
-
-                    // child: TextField(
-                    //   controller: searchController,
-                    //   onChanged: (query) => filterBooks(query),
-                    //   decoration: InputDecoration(
-                    //     hintText: 'Search books...',
-                    //     border: OutlineInputBorder(),
-                    //   ),
-                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
